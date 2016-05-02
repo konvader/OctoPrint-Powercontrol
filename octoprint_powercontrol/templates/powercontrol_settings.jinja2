@@ -1,0 +1,65 @@
+<h4>{{ _('Powercontrol settings for Raspberry Pi') }}</h4>
+{{ _('The plugin controls a 2 channel Raspberry Pi relay card (e.g. SainSmart).') }}<br />
+<br />
+<h5>{{ _('Input configuration') }}</h5>
+{{ _('Specifiy the relay input pins on the pi (not the GPIO number).') }}<br />
+<br />
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 1 input pin') }}</label>
+        <div class="controls">
+            <div class="input-append">
+                <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.inOnePin">
+                <span class="add-on">Pin</span>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 2 input pin') }}</label>
+        <div class="controls">
+            <div class="input-append">
+                <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.inTwoPin">
+                <span class="add-on">Pin</span>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('Printer relay') }}</label>
+        <div class="controls">
+            <input type="number" step="1" min="1" max="2" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.printerRelay">
+            <span class="add-on">Relay</span>
+        </div>
+    </div>
+</form>
+<h5>{{ _('Web-Interface configuration') }}</h5>
+<br />
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">{{ _('Label for relay 1') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.relayOneName">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 1') }}</label>
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.showPwrOneStatus"> Show the status
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('Label for relay 2') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.relayTwoName">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 2') }}</label>
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.showPwrTwoStatus"> Show the status
+            </label>
+         </div>
+    </div>
+</form>
