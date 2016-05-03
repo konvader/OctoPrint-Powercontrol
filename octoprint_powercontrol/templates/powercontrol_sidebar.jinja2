@@ -1,15 +1,15 @@
 <div id="powercontrol" class="input-group">
-    <i class="icon-power-off" data-bind="visible: rOneShow"></i>
-    <span data-bind="visible: rOneShow, text: rOneName"></span>
+    <i class="icon-power-off" data-bind="visible: rOneShow && isConnected()"></i>
+    <span data-bind="visible: rOneShow && isConnected(), text: rOneName"></span>
     <br />
-    <button class="btn btn-primary" data-bind="click: pwrOnRelayOne, visible: rOneShow">{{ _('On') }}</button>
-    <button class="btn btn-primary" data-bind="click: pwrOffRelayOne, visible: rOneShow">{{ _('Off') }}</button>
+    <button class="btn btn-primary" data-bind="click: pwrOnRelayOne, visible: rOneShow && isConnected(), enable: isConnected()">{{ _('On') }}</button>
+    <button class="btn btn-primary" data-bind="click: pwrOffRelayOne, visible: rOneShow && isConnected(), enable: isConnected()">{{ _('Off') }}</button>
     <br />
     <br />
-    <i class="icon-power-off" data-bind="visible: rTwoShow"></i>
-    <span data-bind="visible: rTwoShow, text: rTwoName"></span>
+    <i class="icon-power-off" data-bind="visible: rTwoShow && isConnected()"></i>
+    <span data-bind="visible: rTwoShow && isConnected(), text: rTwoName"></span>
     <br />
-    <button class="btn btn-primary" data-bind="click: pwrOnRelayTwo, visible: rTwoShow">{{ _('On') }}</button>
-    <button class="btn btn-primary" data-bind="click: pwrOffRelayTwo, visible: rTwoShow">{{ _('Off') }}</button>
+    <button class="btn btn-primary" data-bind="click: pwrOnRelayTwo, visible: rTwoShow && isConnected(), enable: isConnected()">{{ _('On') }}</button>
+    <button class="btn btn-primary" data-bind="click: pwrOffRelayTwo, visible: rTwoShow && isConnected(), enable: isConnected()">{{ _('Off') }}</button>
     <br />
 </div>

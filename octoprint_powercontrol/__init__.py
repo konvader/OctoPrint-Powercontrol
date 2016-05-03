@@ -151,7 +151,7 @@ class PowercontrolPlugin(octoprint.plugin.StartupPlugin,
         def get_template_configs(self):
             if self.isRaspi:
                 return [
-                        dict(type="sidebar", name="Powercontrol", icon="print"),
+                        dict(type="sidebar", name="Powercontrol", custom_bindings=False),
                         dict(type="settings", name="Powercontrol", custom_bindings=False)
                 ]
             else:
