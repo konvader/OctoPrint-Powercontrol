@@ -1,65 +1,135 @@
 <h4>{{ _('Powercontrol settings for Raspberry Pi') }}</h4>
 {{ _('The plugin controls a 2 channel Raspberry Pi relay card (e.g. SainSmart).') }}<br />
 <br />
-<h5>{{ _('Input configuration') }}</h5>
-{{ _('Specifiy the relay input pins on the pi (not the GPIO number).') }}<br />
+<div data-bind="visible: settings.plugins.powercontrol.powerinfoActive">
+    <h6>{{ _('Powerinfo was detected! Using Powerinfo Input and Web-Interface configuration.') }}</h5><br />
+</div>
+<div data-bind="visible: !settings.plugins.powercontrol.powerinfoActive()">
+    <form class="form-horizontal">
+        <h5>{{ _('Input configuration') }}</h5>
+        {{ _('Specifiy the relay input pin on the pi (not the GPIO number).') }}<br />
+        <br />
+        <div class="control-group">
+            <label class="control-label">{{ _('relay 1') }}</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.inOnePin">
+                    <span class="add-on">{{ _('Pin') }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('relay 2') }}</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.inTwoPin">
+                    <span class="add-on">{{ _('Pin') }}</span>
+                </div>
+            </div>
+        </div>
+        <h5>{{ _('Web-Interface configuration') }}</h5><br />
+        <div class="control-group">
+            <label class="control-label">{{ _('Label for relay 1') }}</label>
+            <div class="controls">
+                <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.relayOneName">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.showPwrOneRelay">{{ _('Show the controls') }}
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Label for relay 2') }}</label>
+            <div class="controls">
+                <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.relayTwoName">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.showPwrTwoRelay">{{ _('Show the controls') }}
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
+<h5>{{ _('Warnings') }}</h5>
+{{ _('Activate the checkboxes below if you want to be warned before a power off is executed') }}<br />
 <br />
 <form class="form-horizontal">
     <div class="control-group">
-        <label class="control-label">{{ _('relay 1 input pin') }}</label>
         <div class="controls">
-            <div class="input-append">
-                <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.inOnePin">
-                <span class="add-on">Pin</span>
-            </div>
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.warnOnPwrOffRelayOne">{{ _('Activate power off warning relay 1') }}
+            </label>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('relay 2 input pin') }}</label>
         <div class="controls">
-            <div class="input-append">
-                <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.inTwoPin">
-                <span class="add-on">Pin</span>
-            </div>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">{{ _('Printer relay') }}</label>
-        <div class="controls">
-            <input type="number" step="1" min="1" max="2" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.printerRelay">
-            <span class="add-on">Relay</span>
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.warnOnPwrOffRelayTwo">{{ _('Activate power off warning relay 2') }}
+            </label>
         </div>
     </div>
 </form>
-<h5>{{ _('Web-Interface configuration') }}</h5>
+<h5>{{ _('gcode control') }}</h5>
+{{ _('The relay card can be controlled with M117 messages within your start and end gcode scripts.') }}<br />
+{{ _('Usage: M117 Printer on') }}<br />
 <br />
 <form class="form-horizontal">
     <div class="control-group">
-        <label class="control-label">{{ _('Label for relay 1') }}</label>
+        <label class="control-label">{{ _('relay 1 power on message') }}</label>
         <div class="controls">
-            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.relayOneName">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.onOneMessage">
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('relay 1') }}</label>
+        <label class="control-label">{{ _('relay 1 power off message') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.offOneMessage">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 2 power on message') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.onTwoMessage">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 2 power off message') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.offTwoMessage">
+        </div>
+    </div>
+</form>
+<h5>{{ _('Cooldown delay') }}</h5>
+{{ _('You can add a cooldown delay, which is used when a relay was powered off with a gcode message.') }}<br />
+<br />
+<form class="form-horizontal">
+    <div class="control-group">
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.showPwrOneStatus"> Show the status
+                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.relayOneCooldownEnabled">{{ _('Activate cooldown delay relay 1') }}
             </label>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('Label for relay 2') }}</label>
         <div class="controls">
-            <input type="text" class="input-block-level" data-bind="value: settings.plugins.powercontrol.relayTwoName">
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.relayTwoCooldownEnabled">{{ _('Activate cooldown delay relay 2') }}
+            </label>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('relay 2') }}</label>
+        <label class="control-label">{{ _('delay time') }}</label>
         <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.powercontrol.showPwrTwoStatus"> Show the status
-            </label>
-         </div>
+            <div class="input-append">
+                <input type="number" step="1" min="1" max="300" class="input-mini text-right" data-bind="value: settings.plugins.powercontrol.cooldownDelay">
+                <span class="add-on">{{ _('seconds') }}</span>
+            </div>
+        </div>
     </div>
 </form>
